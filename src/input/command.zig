@@ -121,11 +121,23 @@ fn actionCommands(action: Action.Key) []const Command {
             .description = "Reset the terminal to a clean state.",
         }},
 
-        .copy_to_clipboard => comptime &.{.{
-            .action = .copy_to_clipboard,
+        .copy_to_clipboard => comptime &.{ .{
+            .action = .{ .copy_to_clipboard = .mixed },
             .title = "Copy to Clipboard",
-            .description = "Copy the selected text to the clipboard.",
-        }},
+            .description = "Copy the selected text to the clipboard in both plain and styled formats.",
+        }, .{
+            .action = .{ .copy_to_clipboard = .plain },
+            .title = "Copy Selection as Plain Text to Clipboard",
+            .description = "Copy the selected text as plain text to the clipboard.",
+        }, .{
+            .action = .{ .copy_to_clipboard = .vt },
+            .title = "Copy Selection as ANSI Sequences to Clipboard",
+            .description = "Copy the selected text as ANSI escape sequences to the clipboard.",
+        }, .{
+            .action = .{ .copy_to_clipboard = .html },
+            .title = "Copy Selection as HTML to Clipboard",
+            .description = "Copy the selected text as HTML to the clipboard.",
+        } },
 
         .copy_url_to_clipboard => comptime &.{.{
             .action = .copy_url_to_clipboard,
